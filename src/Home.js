@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./home.styles.scss";
 export default function Home() {
   return (
     <div className="homepage">
