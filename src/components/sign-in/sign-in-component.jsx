@@ -31,7 +31,7 @@ class SignIn extends Component {
         <h2>I have already an account</h2>
         <span>Sign in with your email and password</span>
 
-        <form onSubmit={this.handleSubmit}>
+        <form className="sign-up-form"  onSubmit={this.handleSubmit}>
           <FormInput
             type="email"
             handleChange={this.handleChange}

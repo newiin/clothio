@@ -1,18 +1,39 @@
-import firebase from "firebase/app";
-import "firebase/firebase-firestore";
-import "firebase/auth";
+import * as firebase from 'firebase';
 var firebaseConfig = {
-  apiKey: "AIzaSyCpEbHfMfMScL4d8icagCWIn_IijGSY3ok",
-  authDomain: "quickstart-1549200994486.firebaseapp.com",
-  databaseURL: "https://quickstart-1549200994486.firebaseio.com",
-  projectId: "quickstart-1549200994486",
+  apiKey: "AIzaSyAWwiDXSKzI4KsLSJeQyNzI8x12dlZk3ec",
+  authDomain: "clothio-aada9.firebaseapp.com",
+  databaseURL: "https://clothio-aada9.firebaseio.com",
+  projectId: "clothio-aada9",
   storageBucket: "",
-  messagingSenderId: "796832409487",
-  appId: "1:796832409487:web:b5958184e6115dbc"
+  messagingSenderId: "863204590604",
+  appId: "1:863204590604:web:f3dc004c200a6a45"
 };
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
 
+firebase.initializeApp(firebaseConfig);
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+  if (!userAuth) return;
+
+  const userRef = firestore.doc(`users/${userAuth.uid}`);
+
+  const snapShot = await userRef.get();
+
+  if (!snapShot.exists) {
+    const { displayName, email } = userAuth;
+    const createdAt = new Date();
+    try {
+      await userRef.set({
+        displayName,
+        email,
+        createdAt,
+        ...additionalData
+      });
+    } catch (error) {
+      console.log('error creating user', error.message);
+    }
+  }
+
+  return userRef;
+};
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
